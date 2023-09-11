@@ -24,7 +24,7 @@ public class GameModel {
     private LocalDateTime dateTime;
     private int gameScore;
     private int[] lettersUsed;
-    private GameScore score= new PowerBonusScore();
+    private GameScore score= new OriginalScore();
 
     
     
