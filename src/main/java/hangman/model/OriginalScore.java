@@ -1,10 +1,11 @@
 package hangman.model;
 
 public class OriginalScore implements GameScore{
+    private int acumScore=100;
+
     public OriginalScore(){
         super();
     }
-
     /**
      * Calcula el puntaje del jugador segun el numero
      * de letras incorrectas (penaliza con 10), las
@@ -16,12 +17,16 @@ public class OriginalScore implements GameScore{
      * @return Puntaje que lleva le jugador.
      */
     public int calculateScore(int correctCount,int incorrectCount){
-        int acumScore=100;
+        int valorInicial=100;
         int count = incorrectCount;
-        while(count>0 && acumScore>0){
-            acumScore-=10;
+        while(count>0 && valorInicial>0){
+            valorInicial-=10;
             count--;
         }
-        return acumScore;
+        return valorInicial;
+    }
+
+    public void reset() {
+        acumScore=100;
     }
 }

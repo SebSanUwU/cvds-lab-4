@@ -1,9 +1,9 @@
 package hangman.model;
 
 public class BonusScore implements GameScore{
-    public int valorPasado=0;
-    public int acumIncorrectos=0;
-    public int acumCorrectos=0;
+    private int valorPasado=0;
+    private int acumIncorrectos=0;
+    private int acumCorrectos=0;
     public BonusScore(){
         super();
     }
@@ -21,14 +21,23 @@ public class BonusScore implements GameScore{
      */
     public int calculateScore(int correctCount,int incorrectCount){
         if(correctCount>acumCorrectos){
-            valorPasado += 10;
-            acumCorrectos++;
+            while (correctCount>acumCorrectos) {
+                valorPasado += 10;
+                acumCorrectos++;
+            }
         }else if(incorrectCount>acumIncorrectos){
-            if(valorPasado>0){
-                valorPasado-=5;
+            if (valorPasado > 0) {
+                valorPasado -= 5;
             }
             acumIncorrectos++;
         }
         return valorPasado;
+    }
+
+
+    public void reset(){
+        acumCorrectos=0;
+        acumIncorrectos=0;
+        valorPasado=0;
     }
 }

@@ -1,10 +1,10 @@
 package hangman.model;
 
 public class PowerBonusScore implements GameScore{
-    public int valorPasado=0;
-    public int acumIncorrectos=0;
-    public int acumCorrectos=0;
-    public int powerBonus=1;
+    private int valorPasado=0;
+    private int acumIncorrectos=0;
+    private int acumCorrectos=0;
+    private int powerBonus=1;
     public PowerBonusScore(){
         super();
     }
@@ -25,9 +25,14 @@ public class PowerBonusScore implements GameScore{
      */
     public int calculateScore(int correctCount,int incorrectCount){
         if(correctCount>acumCorrectos){
-            valorPasado+=(int)Math.pow(5,powerBonus);
-            powerBonus++;
-            acumCorrectos++;
+            while (correctCount>acumCorrectos){
+                valorPasado+=(int)Math.pow(5,powerBonus);
+                if(valorPasado>500){
+                    valorPasado=500;
+                }
+                powerBonus++;
+                acumCorrectos++;
+            }
         }else if(incorrectCount>acumIncorrectos){
             if(valorPasado>0){
                 valorPasado-=8;
@@ -38,9 +43,12 @@ public class PowerBonusScore implements GameScore{
             acumIncorrectos++;
             powerBonus=1;
         }
-        if(valorPasado>500){
-            valorPasado=500;
-        }
+
         return valorPasado;
+    }
+    public void reset(){
+        acumCorrectos=0;
+        acumIncorrectos=0;
+        valorPasado=0;
     }
 }
